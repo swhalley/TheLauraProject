@@ -5,6 +5,33 @@
 
 <body>
     Server is up
+    <form>
+        <input type="text" name="custName" />
+        <button onclick="getAllNames(); return false;">Get All</button>
+        <button onclick="getAName(this.form.custName.value); return false;">Find</button>
+        <br />
+        <div id="output"></div>
+    </form>
+
+    <script type="text/javascript">
+        var outputNode = document.querySelector( '#output' );
+
+        var getAllNames = function(){
+            fetch( '/all' ).then( result => {
+                result.json().then( jsonText => {
+                    outputNode.innerText = jsonText;
+                });
+            });
+        }
+
+        var getAName = function( name ) {
+            fetch( `c?name=${name}` ).then( result => {
+                result.text().then( stringText => {
+                    outputNode.innerText = stringText;
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>

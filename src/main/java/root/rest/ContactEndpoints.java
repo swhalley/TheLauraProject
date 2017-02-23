@@ -1,30 +1,29 @@
-package rest;
+package root.rest;
 
+import root.data.ContactListDAO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class ContactEndpoints {
-    private static List<String> contacts;
+    private ContactListDAO contactDAO;
 
-    public ContactEndpoints(){
-        contacts = new ArrayList<String>();
-        contacts.add( "Sean");
-        contacts.add( "Dave");
-        contacts.add( "Steve");
+    @Autowired
+    public ContactEndpoints(ContactListDAO contactDAO){
+        this.contactDAO = contactDAO;
     }
 
     @RequestMapping( "/all")
     public List<String> getContacts(){
-        return contacts;
+        return contactDAO.getAllContacts();
     }
 
     @RequestMapping( "/c")
     public String getContact( @RequestParam( value="name", defaultValue = "Sean") String name){
-        return contacts.stream().anyMatch(p -> p.toLowerCase().equals( name.toLowerCase())) ? "Found him" : "keep looking";
+        return contactDAO.isContactInList( name ) ? "Found him" : "keep looking";
     }
 }
