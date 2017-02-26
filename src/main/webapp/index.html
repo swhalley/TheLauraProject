@@ -1,17 +1,35 @@
 <html>
 <head>
     <title>Hello REST</title>
+    <style type="text/css">
+        form {
+            display : flex;
+        }
+    </style>
 </head>
 
 <body>
-    Server is up
     <form>
-        <input type="text" name="custName" />
-        <button onclick="getAllNames(); return false;">Get All</button>
-        <button onclick="getAName(this.form.custName.value); return false;">Find</button>
-        <br />
-        <div id="output"></div>
+        <fieldset>
+            <legend>Retrieve All</legend>
+            <button onclick="getAllNames(); return false;">Get All</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Check If Exists</legend>
+            <input type="text" name="nameToFind" />
+            <button onclick="getAName(this.form.nameToFind.value); return false;">Find</button>
+        </fieldset>
+
+        <fieldset>
+           <legend>Add New</legend>
+            <input type="text" name="nameToAdd" />
+            <button onclick="insertAName(this.form.nameToAdd.value); return false;">Add</button>
+        </fieldset>
     </form>
+
+    <br />
+    <div id="output"></div>
 
     <script type="text/javascript">
         var outputNode = document.querySelector( '#output' );
@@ -26,6 +44,17 @@
 
         var getAName = function( name ) {
             fetch( `c?name=${name}` ).then( result => {
+                result.text().then( stringText => {
+                    outputNode.innerText = stringText;
+                });
+            });
+        }
+
+        var insertAName = function( name ){
+            fetch( 'new', {
+                method: 'post',
+                body: name
+            }).then( result => {
                 result.text().then( stringText => {
                     outputNode.innerText = stringText;
                 });

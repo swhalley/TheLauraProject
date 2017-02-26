@@ -23,4 +23,8 @@ public class ContactListDAO {
     public boolean isContactInList( String name ){
         return contacts.stream().anyMatch(p -> p.toLowerCase().equals( name.toLowerCase()));
     }
+
+    public void add(String name) {
+        contacts.add( name );
+    }
 }
