@@ -6,3 +6,5 @@ services:
       - "9080:9080"
     volumes:
       - "./build/libs/:/config/dropins"
+  db:
+    build: ./seed
