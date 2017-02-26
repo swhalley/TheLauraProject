@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface ContactListMapper {
 
-    @Select( "SELECT * FROM Contacts" )
+    @Select( "SELECT name FROM Contacts" )
     public List<String> getAllContacts();
 
     @Select( "SELECT EXISTS(SELECT 1 FROM Contacts WHERE name=#{name})" )
