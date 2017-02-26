@@ -17,7 +17,7 @@
         var outputNode = document.querySelector( '#output' );
 
         var getAllNames = function(){
-            fetch( '/all' ).then( result => {
+            fetch( 'all' ).then( result => {
                 result.json().then( jsonText => {
                     outputNode.innerText = jsonText;
                 });
