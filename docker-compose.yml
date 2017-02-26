@@ -1,0 +1,8 @@
+version: '2'
+services:
+  waslp:
+    image: 'websphere-liberty:webProfile7'
+    ports:
+      - "9080:9080"
+    volumes:
+      - "./build/libs/:/config/dropins"
