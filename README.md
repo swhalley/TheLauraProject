@@ -23,6 +23,8 @@ docker-compose up
 
 Once the server is running, hit the index file here - http://localhost:9080/contactRest/
 
+If modifying the application; after the server is up and running, simple rebuild the war and websphere will automatically redeploy the jar from the /build/libs directory. The docker compose file has a volume mapped internally to the docker image so any changes to the war file will automatically be picked up. Simply running ```gradle war``` again is enough to trigger the redeploy
+
 
 ### Additional Help
 See Docker log files ```docker-compose logs```
